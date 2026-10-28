@@ -28,3 +28,8 @@ build-backend = "uv_build"
 [tool.uv.build-backend]
 module-name=["api"]
 
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
+]
+
