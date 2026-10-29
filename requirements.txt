@@ -7,3 +7,5 @@ langchain-core
 langchain-community
 pymupdf
 qdrant-client
+langchain_qdrant
+sentence_transformers
