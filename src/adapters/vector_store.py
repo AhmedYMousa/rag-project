@@ -8,8 +8,7 @@ from ingestion.embeddings import SentenceTransformerEmbeddings
 
 
 class VectorStore:
-    def __init__(self):
-        settings = Settings()
+    def __init__(self, settings: Settings):
         self.client = QdrantClient(settings.qdrant_url)
         self.collection_name = settings.qdrant_collection
         self.embeddings = SentenceTransformerEmbeddings()
@@ -29,3 +28,6 @@ class VectorStore:
         uuids = [str(uuid.uuid4()) for _ in documents]
         docIds = self.vector_store.add_documents(documents, ids=uuids)
         return docIds
+
+    def close(self) -> None:
+        self.client.close()
