@@ -25,10 +25,10 @@ class JsonFormatter(logging.Formatter):
             "level": record.levelname,
             "logger": record.name,
             "message": record.getMessage(),
-            "request_id": getattr(record, "request_id", "-")
+            "request_id": getattr(record, "request_id", "-"),
         }
         return json.dumps(payload)
-    
+
 
 # 1. Create a handler that prints to the terminal (stdout).
 # 2. Tell it to format every record with our JsonFormatter.
@@ -38,12 +38,13 @@ class JsonFormatter(logging.Formatter):
 # 6. Attach our handler to the root logger.
 # 7. Set the minimum level. With "INFO", DEBUG messages are dropped.
 
-def setup_logging(level: str = "INFO") -> None:
-    handler = logging.StreamHandler(sys.stdout)   # 1
-    handler.setFormatter(JsonFormatter())         # 2
-    handler.addFilter(RequestIdFilter())          # 3
 
-    root = logging.getLogger()                    # 4
-    root.handlers.clear()                         # 5
-    root.addHandler(handler)                      # 6
-    root.setLevel(level)                          # 7
+def setup_logging(level: str = "INFO") -> None:
+    handler = logging.StreamHandler(sys.stdout)  # 1
+    handler.setFormatter(JsonFormatter())  # 2
+    handler.addFilter(RequestIdFilter())  # 3
+
+    root = logging.getLogger()  # 4
+    root.handlers.clear()  # 5
+    root.addHandler(handler)  # 6
+    root.setLevel(level)  # 7

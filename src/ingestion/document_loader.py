@@ -7,13 +7,12 @@ from core.config import Settings
 
 
 class DocumentLoader:
-
     def __init__(self, settings: Settings):
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=settings.chunk_size,
             chunk_overlap=settings.chunk_overlap,
             length_function=len,
-            separators=["\n\n", "\n", " ", ""]
+            separators=["\n\n", "\n", " ", ""],
         )
 
     def load_documents(self, file_name: str, content: bytes):
@@ -29,6 +28,12 @@ class DocumentLoader:
 
             loader = PyMuPDFLoader(temp_path)
             docList = loader.load()
+
+            # Fix document source and let it point to the original file_name
+            for doc in docList:
+                doc.metadata["source"] = file_name
+                doc.metadata.pop("file_path", None)
+
             documents.extend(docList)
 
         return documents

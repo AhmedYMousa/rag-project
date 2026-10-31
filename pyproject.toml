@@ -12,7 +12,9 @@ dependencies = [
     "langchain>=1.4.7",
     "langchain-community>=0.4.2",
     "langchain-core>=1.7.1",
+    "langchain-ollama>=1.1.0",
     "langchain-qdrant>=1.1.0",
+    "pydantic>=2.14.1",
     "pydantic-settings>=2.16.2",
     "pymupdf>=2.0",
     "python-dotenv>=1.2.4",
@@ -35,5 +37,6 @@ module-name=["api"]
 [dependency-groups]
 dev = [
     "ipykernel>=7.4.0",
+    "ruff>=0.17.3",
 ]
 

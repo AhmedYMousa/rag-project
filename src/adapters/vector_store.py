@@ -17,17 +17,25 @@ class VectorStore:
             client=self.client,
             collection_name=self.collection_name,
             embedding=self.embeddings,
-            distance=Distance.COSINE)
+            distance=Distance.COSINE,
+        )
 
     def _ensure_collection(self):
         if not self.client.collection_exists(self.collection_name):
-            self.client.create_collection(self.collection_name,
-                                          vectors_config=VectorParams(size=self.embeddings.dimension, distance=Distance.COSINE))
+            self.client.create_collection(
+                self.collection_name,
+                vectors_config=VectorParams(
+                    size=self.embeddings.dimension, distance=Distance.COSINE
+                ),
+            )
 
     def add_documents(self, documents: list[Document]) -> list[str]:
         uuids = [str(uuid.uuid4()) for _ in documents]
         docIds = self.vector_store.add_documents(documents, ids=uuids)
         return docIds
+
+    def query(self, query_text: str, k: int) -> list[tuple[Document, float]]:
+        return self.vector_store.similarity_search_with_score(query_text, k=k)
 
     def close(self) -> None:
         self.client.close()

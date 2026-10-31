@@ -9,3 +9,4 @@ pymupdf
 qdrant-client
 langchain_qdrant
 sentence_transformers
+langchain_ollama
