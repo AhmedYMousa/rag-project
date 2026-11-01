@@ -1,8 +1,10 @@
-import tempfile
 import os
+import tempfile
+
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 from core.config import Settings
 
 
@@ -15,7 +17,7 @@ class DocumentLoader:
             separators=["\n\n", "\n", " ", ""],
         )
 
-    def load_documents(self, file_name: str, content: bytes):
+    def load_documents(self, file_name: str, content: bytes, document_id: str):
         """Process PDF Document into a langchain document"""
 
         documents: list[Document] = []
@@ -32,6 +34,7 @@ class DocumentLoader:
             # Fix document source and let it point to the original file_name
             for doc in docList:
                 doc.metadata["source"] = file_name
+                doc.metadata["document_id"] = document_id
                 doc.metadata.pop("file_path", None)
 
             documents.extend(docList)

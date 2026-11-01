@@ -1,8 +1,14 @@
-import uuid
 from langchain_core.documents import Document
-from qdrant_client import QdrantClient
-from qdrant_client.models import VectorParams, Distance
 from langchain_qdrant import QdrantVectorStore
+from qdrant_client import QdrantClient
+from qdrant_client.models import (
+    Distance,
+    FieldCondition,
+    Filter,
+    MatchValue,
+    VectorParams,
+)
+
 from core.config import Settings
 from ingestion.embeddings import SentenceTransformerEmbeddings
 
@@ -29,9 +35,9 @@ class VectorStore:
                 ),
             )
 
-    def add_documents(self, documents: list[Document]) -> list[str]:
-        uuids = [str(uuid.uuid4()) for _ in documents]
-        docIds = self.vector_store.add_documents(documents, ids=uuids)
+    def add_documents(self, documents: list[Document], ids: list[str]) -> list[str]:
+        # uuids = [str(uuid.uuid4()) for _ in documents]
+        docIds = self.vector_store.add_documents(documents, ids=ids)
         return docIds
 
     def query(self, query_text: str, k: int) -> list[tuple[Document, float]]:
@@ -39,3 +45,17 @@ class VectorStore:
 
     def close(self) -> None:
         self.client.close()
+
+    def count_by_document(self, document_id: str) -> int:
+        result = self.client.count(
+            self.collection_name,
+            count_filter=Filter(
+                must=[
+                    FieldCondition(
+                        key="metadata.document_id", match=MatchValue(value=document_id)
+                    )
+                ]
+            ),
+            exact=True,
+        )
+        return result.count

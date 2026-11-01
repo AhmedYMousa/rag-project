@@ -1,6 +1,5 @@
 from api.schemas import Source
 
-
 SYSTEM_PROMPT = (
     "You answer questions using ONLY the numbered context passages provided.\n"
     "Rules:\n"

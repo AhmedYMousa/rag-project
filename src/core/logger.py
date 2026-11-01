@@ -1,8 +1,8 @@
-from contextvars import ContextVar
 import json
 import logging
-from datetime import datetime, UTC
 import sys
+from contextvars import ContextVar
+from datetime import UTC, datetime
 
 # per-request IDs, a variable whose value is specific to the current request, even when many requests are handled concurrently.
 request_id_var: ContextVar[str] = ContextVar("request_id", default="-")

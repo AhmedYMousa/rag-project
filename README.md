@@ -4,7 +4,7 @@ A local-first Retrieval-Augmented Generation (RAG) API built with FastAPI and Qd
 
 The goal of this project is to show what a production-ready RAG service looks like beyond a notebook demo: clear module boundaries, typed configuration, structured logging with request tracing, and dependency injection. The pipeline is a thin layer of my own code rather than a heavy framework, so the architecture stays visible.
 
-> **Status:** work in progress. PDF ingestion into Qdrant works; retrieval and answer generation are next (see Roadmap).
+> **Status:** work in progress.
 
 ## Features
 
@@ -120,7 +120,7 @@ Example log line:
 - [x] Typed settings and JSON logging with request IDs
 - [x] PDF ingestion into Qdrant
 - [x] Dependency injection through the app lifespan
-- [ ] `/query` endpoint: retrieve relevant chunks and generate a grounded answer with an LLM (Ollama), with source citations and streaming
+- [x] `/query` endpoint: retrieve relevant chunks and generate a grounded answer with an LLM (Ollama), with source citations and streaming
 - [ ] Ingestion hardening: file type and size validation, deduplication by content hash, source and page metadata
 - [ ] Consistent error responses and health/readiness endpoints
 - [ ] Tests (unit + integration against Qdrant), Ruff, mypy, pre-commit

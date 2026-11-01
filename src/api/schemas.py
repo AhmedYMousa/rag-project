@@ -16,3 +16,9 @@ class Source(BaseModel):
 class QueryResponse(BaseModel):
     answer: str | None = None
     sources: list[Source]
+
+
+class IngestResponse(BaseModel):
+    document_id: str
+    chunks: int
+    status: str
