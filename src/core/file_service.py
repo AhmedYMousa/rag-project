@@ -19,6 +19,9 @@ class FileService:
             raise FileTooLargeException(max_bytes)
 
     def _validate_type(self, file_name) -> None:
-        extension = Path(file_name).suffix.lower()
+        extension = self.get_file_extension(file_name)
         if extension not in self.settings.allowed_file_extensions:
             raise UnsupportedFileTypeException(extension)
+
+    def get_file_extension(self, file_name) -> str:
+        return Path(file_name).suffix.lower()

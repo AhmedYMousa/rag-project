@@ -8,7 +8,7 @@ class QueryRequest(BaseModel):
 
 class Source(BaseModel):
     source: str
-    page: int
+    page: int | None = None
     score: float
     text: str
 

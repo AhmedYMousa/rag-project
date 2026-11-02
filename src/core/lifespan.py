@@ -6,14 +6,16 @@ from adapters.llm import Llm
 from adapters.vector_store import VectorStore
 from core.config import Settings
 from core.file_service import FileService
-from ingestion.document_loader import DocumentLoader
+from ingestion.loaders.markdown_loader import MarkdownLoader
+from ingestion.loaders.pdf_loader import PdfLoader
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     app.state.settings = Settings()
     app.state.vector_store = VectorStore(app.state.settings)
-    app.state.document_loader = DocumentLoader(app.state.settings)
+    app.state.pdf_loader = PdfLoader(app.state.settings)
+    app.state.markdown_loader = MarkdownLoader(app.state.settings)
     app.state.llm = Llm(app.state.settings)
     app.state.file_service = FileService(app.state.settings)
 

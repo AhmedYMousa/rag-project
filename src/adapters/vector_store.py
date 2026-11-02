@@ -1,7 +1,7 @@
 from langchain_core.documents import Document
 from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
-from qdrant_client.http.exceptions import ResponseHandlingException, UnexpectedResponse
+from qdrant_client.http.exceptions import ResponseHandlingException
 from qdrant_client.models import (
     Distance,
     FieldCondition,

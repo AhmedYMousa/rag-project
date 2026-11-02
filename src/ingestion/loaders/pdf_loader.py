@@ -8,7 +8,9 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from core.config import Settings
 
 
-class DocumentLoader:
+class PdfLoader:
+    extensions = ".pdf"
+
     def __init__(self, settings: Settings):
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=settings.chunk_size,

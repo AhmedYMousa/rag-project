@@ -26,7 +26,8 @@ src/
 │   ├── config.py          # Settings (pydantic-settings)
 │   └── logger.py          # JSON logging + request ID context
 ├── ingestion/
-│   ├── document_loader.py # PDF loading and chunking
+|   ├── loaders 
+│   |   ├── document_loader.py # PDF loading and chunking
 │   └── embeddings.py      # SentenceTransformer embeddings adapter
 └── adapters/
     └── vector_store.py    # Qdrant vector store wrapper

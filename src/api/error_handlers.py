@@ -10,11 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 def error_response(
-    request: Request,
-    status_code: int,
-    code: str,
-    message: str,
-    details=None
+    request: Request, status_code: int, code: str, message: str, details=None
 ) -> JSONResponse:
     request_id = getattr(request.state, "request_id", None)
     body = ErrorResponse(
@@ -30,14 +26,17 @@ def error_response(
 
 async def ingestion_error_handler(request: Request, exc: IngestionException):
     logger.warning("%s %s", exc.code, exc.message)
-    return error_response(request, exc.status_code,  exc.code, exc.message)
+    return error_response(request, exc.status_code, exc.code, exc.message)
 
 
 async def unhandled_error_handler(request: Request, exc: Exception):
     request_id = getattr(request.state, "request_id", None)
-    logger.exception("An unexpected error occurred",
-                     request.method, request.url.path,
-                     extra={"request_id", request_id})
+    logger.exception(
+        "An unexpected error occurred %s %s",
+        request.method,
+        request.url.path,
+        extra={"request_id": request_id},
+    )
 
     return error_response(
         request, 500, "internal_error", "An unexpected error occurred"

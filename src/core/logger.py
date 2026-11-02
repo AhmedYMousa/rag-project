@@ -28,7 +28,7 @@ class JsonFormatter(logging.Formatter):
             "message": record.getMessage(),
             "request_id": getattr(record, "request_id", "-"),
         }
-        
+
         if record.exc_info:
             payload["exception"] = self.formatException(record.exc_info)
 

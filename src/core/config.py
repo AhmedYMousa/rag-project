@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     ollama_url: str = "http://localhost:11434"
     ollama_model: str = "llama3.2:3b"
     max_upload_mb: int = 20
-    allowed_file_extensions: list[str] = [".pdf"]
+    allowed_file_extensions: list[str] = [".pdf", ".md"]
 
     @property
     def max_upload_bytes(self) -> int:
