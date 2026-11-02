@@ -29,12 +29,12 @@ async def ingest(
     settings: Annotated[Settings, Depends(get_settings)],
     file: Annotated[UploadFile, File(...)],
 ):
-    max_bytes = settings.max_upload_bytes
+    max_mb = settings.max_upload_mb
     try:
-        file_service.validate(file=file, max_bytes=max_bytes)
+        file_service.validate(file=file, max_bytes=max_mb)
         content = await file.read()
-        if len(content) > max_bytes:
-            raise FileTooLargeException(max_bytes)
+        if len(content) > max_mb:
+            raise FileTooLargeException(max_mb)
         document_id = generate_document_id(content)
         existing = vector_store.count_by_document(document_id)
         if existing:
@@ -49,9 +49,6 @@ async def ingest(
         ids = generate_chunk_ids(document_id, len(split_docs))
         document_ids = vector_store.add_documents(split_docs, ids)
 
-    except Exception as exc:
-        logger.exception("Ingestion failed for %s", file.filename)
-        raise Exception(exc)
     finally:
         await file.close()
 

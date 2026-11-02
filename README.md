@@ -121,7 +121,7 @@ Example log line:
 - [x] PDF ingestion into Qdrant
 - [x] Dependency injection through the app lifespan
 - [x] `/query` endpoint: retrieve relevant chunks and generate a grounded answer with an LLM (Ollama), with source citations and streaming
-- [ ] Ingestion hardening: file type and size validation, deduplication by content hash, source and page metadata
+- [x] Ingestion hardening: file type and size validation, deduplication by content hash, source and page metadata
 - [ ] Consistent error responses and health/readiness endpoints
 - [ ] Tests (unit + integration against Qdrant), Ruff, mypy, pre-commit
 - [ ] GitHub Actions CI

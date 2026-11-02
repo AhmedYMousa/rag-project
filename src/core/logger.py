@@ -12,7 +12,8 @@ class RequestIdFilter(logging.Filter):
     """Attach the current request ID to every log record."""
 
     def filter(self, record: logging.LogRecord) -> bool:
-        record.request_id = request_id_var.get()
+        if not hasattr(record, "request_id"):
+            record.request_id = request_id_var.get()
         return True
 
 
@@ -27,6 +28,10 @@ class JsonFormatter(logging.Formatter):
             "message": record.getMessage(),
             "request_id": getattr(record, "request_id", "-"),
         }
+        
+        if record.exc_info:
+            payload["exception"] = self.formatException(record.exc_info)
+
         return json.dumps(payload)
 
 

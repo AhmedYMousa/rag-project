@@ -22,3 +22,10 @@ class IngestResponse(BaseModel):
     document_id: str
     chunks: int
     status: str
+
+
+class ErrorResponse(BaseModel):
+    code: str
+    message: str
+    request_id: str | None = None
+    details: list[dict] | None = None

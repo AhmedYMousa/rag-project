@@ -1,6 +1,7 @@
 from langchain_core.documents import Document
 from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
+from qdrant_client.http.exceptions import ResponseHandlingException, UnexpectedResponse
 from qdrant_client.models import (
     Distance,
     FieldCondition,
@@ -10,7 +11,10 @@ from qdrant_client.models import (
 )
 
 from core.config import Settings
+from core.errors import VectorStoreUnavailableException
 from ingestion.embeddings import SentenceTransformerEmbeddings
+
+_QDRANT_ERRORS = (ConnectionError, ResponseHandlingException)
 
 
 class VectorStore:
@@ -37,25 +41,35 @@ class VectorStore:
 
     def add_documents(self, documents: list[Document], ids: list[str]) -> list[str]:
         # uuids = [str(uuid.uuid4()) for _ in documents]
-        docIds = self.vector_store.add_documents(documents, ids=ids)
-        return docIds
+        try:
+            doc_ids = self.vector_store.add_documents(documents, ids=ids)
+            return doc_ids
+        except _QDRANT_ERRORS as exc:
+            raise VectorStoreUnavailableException() from exc
 
     def query(self, query_text: str, k: int) -> list[tuple[Document, float]]:
-        return self.vector_store.similarity_search_with_score(query_text, k=k)
+        try:
+            return self.vector_store.similarity_search_with_score(query_text, k=k)
+        except _QDRANT_ERRORS as exc:
+            raise VectorStoreUnavailableException() from exc
 
     def close(self) -> None:
         self.client.close()
 
     def count_by_document(self, document_id: str) -> int:
-        result = self.client.count(
-            self.collection_name,
-            count_filter=Filter(
-                must=[
-                    FieldCondition(
-                        key="metadata.document_id", match=MatchValue(value=document_id)
-                    )
-                ]
-            ),
-            exact=True,
-        )
-        return result.count
+        try:
+            result = self.client.count(
+                self.collection_name,
+                count_filter=Filter(
+                    must=[
+                        FieldCondition(
+                            key="metadata.document_id",
+                            match=MatchValue(value=document_id),
+                        )
+                    ]
+                ),
+                exact=True,
+            )
+            return result.count
+        except _QDRANT_ERRORS as exc:
+            raise VectorStoreUnavailableException() from exc
