@@ -16,8 +16,11 @@ class Settings(BaseSettings):
     chunk_overlap: int = 200
     qdrant_url: str
     qdrant_collection: str
+    qdrant_collection_eval: str = "documents_eval"
     ollama_url: str = "http://localhost:11434"
     ollama_model: str = "llama3.2:3b"
+    ollama_temperature: float = 0.7
+    ollama_seed: int | None = None
     max_upload_mb: int = 20
     allowed_file_extensions: list[str] = [".pdf", ".md"]
 

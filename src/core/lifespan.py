@@ -8,6 +8,7 @@ from core.config import Settings
 from core.file_service import FileService
 from ingestion.loaders.markdown_loader import MarkdownLoader
 from ingestion.loaders.pdf_loader import PdfLoader
+from rag.pipeline import RagPipeline
 
 
 @asynccontextmanager
@@ -18,6 +19,7 @@ async def lifespan(app: FastAPI):
     app.state.markdown_loader = MarkdownLoader(app.state.settings)
     app.state.llm = Llm(app.state.settings)
     app.state.file_service = FileService(app.state.settings)
+    app.state.rag_pipeline = RagPipeline(app.state.vector_store, app.state.llm)
 
     try:
         # Everything before `yield` runs once at startup

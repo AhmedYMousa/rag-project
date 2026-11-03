@@ -13,10 +13,13 @@ _LLM_ERRORS = (ResponseError, ConnectionError, httpx.TimeoutException)
 class Llm:
     def __init__(self, settings: Settings):
         self.client = ChatOllama(
-            base_url=settings.ollama_url, model=settings.ollama_model
+            base_url=settings.ollama_url,
+            model=settings.ollama_model,
+            temperature=settings.ollama_temperature,
+            seed=settings.ollama_seed,
         )
 
-    def generate(self, prompt) -> str:
+    def generate(self, prompt) -> str | list[str]:
         messages = [SystemMessage(SYSTEM_PROMPT), HumanMessage(prompt)]
         try:
             response = self.client.invoke(messages)

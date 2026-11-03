@@ -6,6 +6,7 @@ from core.config import Settings
 from core.file_service import FileService
 from ingestion.loaders.markdown_loader import MarkdownLoader
 from ingestion.loaders.pdf_loader import PdfLoader
+from rag.pipeline import RagPipeline
 
 
 def get_vector_store(request: Request) -> VectorStore:
@@ -30,3 +31,7 @@ def get_settings(request: Request) -> Settings:
 
 def get_markdown_loader(request: Request) -> MarkdownLoader:
     return request.app.state.markdown_loader
+
+
+def get_rag_pipeline(request: Request) -> RagPipeline:
+    return request.app.state.rag_pipeline

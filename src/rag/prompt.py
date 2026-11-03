@@ -12,8 +12,9 @@ SYSTEM_PROMPT = (
 
 def build_prompt(question: str, sources: list[Source]) -> str:
     context = "\n\n".join(
-        f"[{i}] ({s.source}, p. {s.page + 1})\n{s.text}" if s.page is not None else
-        f"[{i}] ({s.source})\n{s.text}"
+        f"[{i}] ({s.source}, p. {s.page + 1})\n{s.text}"
+        if s.page is not None
+        else f"[{i}] ({s.source})\n{s.text}"
         for i, s in enumerate(sources, start=1)
     )
 
