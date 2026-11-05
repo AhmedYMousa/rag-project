@@ -1,0 +1,56 @@
+{"id":"q001","label":"pass","note":"","failure_type":""}
+{"id":"q002","label":"pass","note":"","failure_type":""}
+{"id":"q003","label":"pass","note":"","failure_type":""}
+{"id":"q004","label":"pass","note":"","failure_type":""}
+{"id":"q005","label":"pass","note":"","failure_type":""}
+{"id":"q006","label":"pass","note":"","failure_type":""}
+{"id":"q007","label":"pass","note":"","failure_type":""}
+{"id":"q008","label":"pass","note":"","failure_type":""}
+{"id":"q009","label":"fail","note":"Correct range, wrongly says it's higher than Senior AI Solutions Architect.","failure_type":"confident wrong fact"}
+{"id":"q010","label":"pass","note":"","failure_type":""}
+{"id":"q011","label":"pass","note":"","failure_type":""}
+{"id":"q012","label":"pass","note":"","failure_type":""}
+{"id":"q013","label":"pass","note":"","failure_type":""}
+{"id":"q014","label":"pass","note":"","failure_type":""}
+{"id":"q015","label":"pass","note":"","failure_type":""}
+{"id":"q016","label":"pass","note":"","failure_type":""}
+{"id":"q017","label":"pass","note":"","failure_type":""}
+{"id":"q018","label":"pass","note":"","failure_type":""}
+{"id":"q019","label":"pass","note":"","failure_type":""}
+{"id":"q020","label":"pass","note":"","failure_type":""}
+{"id":"q021","label":"fail","note":"Path stops at Staff, missing Principal Engineer or Head of Machine Learning","failure_type":"incomplete path"}
+{"id":"q022","label":"pass","note":"","failure_type":""}
+{"id":"q023","label":"fail","note":"Path stops at Staff, missing Principal Platform Engineer or Head of Platform","failure_type":"incomplete path"}
+{"id":"q024","label":"fail","note":"Path stops at Staff, missing Principal Data Architect or Head of Data Platform","failure_type":"incomplete path"}
+{"id":"q025","label":"pass","note":"","failure_type":""}
+{"id":"q026","label":"pass","note":"","failure_type":""}
+{"id":"q027","label":"pass","note":"","failure_type":""}
+{"id":"q028","label":"fail","note":"Path stops at Staff, missing Principal Engineer or Head of AI Quality","failure_type":"incomplete path"}
+{"id":"q029","label":"fail","note":"Path stops at Principal, missing Head of Product Security or CISO","failure_type":"incomplete path"}
+{"id":"q030","label":"fail","note":"Path stops at Principal , missing Distinguished Scientist or Director of Research","failure_type":"incomplete path"}
+{"id":"q031","label":"fail","note":"Gave correct one for 30 days and failed the rest, 60 days facts are made-up","failure_type":"confident wrong fact"}
+{"id":"q032","label":"pass","note":"","failure_type":""}
+{"id":"q033","label":"pass","note":"","failure_type":""}
+{"id":"q034","label":"pass","note":"","failure_type":""}
+{"id":"q035","label":"pass","note":"","failure_type":""}
+{"id":"q036","label":"pass","note":"","failure_type":""}
+{"id":"q037","label":"fail","note":"correct title, wrong range","failure_type":"confident wrong fact"}
+{"id":"q038","label":"pass","note":"","failure_type":""}
+{"id":"q039","label":"fail","note":"Named one correct role AI Security Engineer, the other two are incorrect","failure_type":"confident wrong fact"}
+{"id":"q040","label":"pass","note":"","failure_type":""}
+{"id":"q041","label":"pass","note":"","failure_type":""}
+{"id":"q042","label":"pass","note":"","failure_type":""}
+{"id":"q043","label":"pass","note":"","failure_type":""}
+{"id":"q044","label":"pass","note":"","failure_type":""}
+{"id":"q045","label":"pass","note":"","failure_type":""}
+{"id":"q046","label":"pass","note":"","failure_type":""}
+{"id":"q047","label":"fail","note":"Drift from the typical path which is MLOps","failure_type":"confident wrong fact"}
+{"id":"q048","label":"pass","note":"","failure_type":""}
+{"id":"q049","label":"pass","note":"","failure_type":""}
+{"id":"q050","label":"fail","note":"Gave up early, the answer is listed in the sources","failure_type":"Gave up early"}
+{"id":"q051","label":"pass","note":"","failure_type":""}
+{"id":"q052","label":"fail","note":"Gave up early, the answer is in the source","failure_type":"Gave up early"}
+{"id":"q053","label":"pass","note":"","failure_type":""}
+{"id":"q054","label":"fail","note":"Gave up early","failure_type":"Gave up early"}
+{"id":"q055","label":"fail","note":"It said 27001 (wrong), source says 42001","failure_type":"confident wrong fact"}
+{"id":"q056","label":"fail","note":"First part is correct, it gave a half-complete answer. needs to name all roles","failure_type":"incomplete answer"}

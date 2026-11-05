@@ -52,10 +52,12 @@ def hit_rate(vector_store: VectorStore, rows: list[dict], top_k: int):
 
 
 if __name__ == "__main__":
-    setttings = Settings()
-    setttings.qdrant_collection = setttings.qdrant_collection_eval
-    store = VectorStore(setttings)
-    loader = MarkdownLoader(setttings)
+    settings = Settings()
+    settings.qdrant_collection = settings.qdrant_collection_eval
+    settings.ollama_temperature = 0
+    settings.ollama_seed = 42
+    store = VectorStore(settings)
+    loader = MarkdownLoader(settings)
     try:
         load_corpus(vector_store=store, markdonw_loader=loader)
         rows = load_golden_set()
